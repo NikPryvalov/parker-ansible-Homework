@@ -1,1 +1,68 @@
 
+amazon-ebs.ubuntu: output will be in this color.
+
+==> amazon-ebs.ubuntu: Prevalidating any provided VPC information
+==> amazon-ebs.ubuntu: Prevalidating AMI Name: packer-ubuntu-aws-1627394806
+    amazon-ebs.ubuntu: Found Image ID: ami-0864290505bf6b170
+==> amazon-ebs.ubuntu: Creating temporary keypair: packer_610012f6-74c5-038b-318d-2287ba7eab7f
+==> amazon-ebs.ubuntu: Creating temporary security group for this instance: packer_610012fa-bdd5-2a96-c692-fdf24f96be10
+==> amazon-ebs.ubuntu: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
+==> amazon-ebs.ubuntu: Launching a source AWS instance...
+==> amazon-ebs.ubuntu: Adding tags to source instance
+    amazon-ebs.ubuntu: Adding tag: "Name": "Packer Builder"
+    amazon-ebs.ubuntu: Instance ID: i-0102c568a35f0c5b7
+==> amazon-ebs.ubuntu: Waiting for instance (i-0102c568a35f0c5b7) to become ready...
+==> amazon-ebs.ubuntu: Using SSH communicator to connect: 34.211.228.198
+==> amazon-ebs.ubuntu: Waiting for SSH to become available...
+==> amazon-ebs.ubuntu: Connected to SSH!
+==> amazon-ebs.ubuntu: Stopping the source instance...
+    amazon-ebs.ubuntu: Stopping instance
+==> amazon-ebs.ubuntu: Waiting for the instance to stop...
+==> amazon-ebs.ubuntu: Creating AMI packer-ubuntu-aws-1627394806 from instance i-0102c568a35f0c5b7
+    amazon-ebs.ubuntu: AMI: ami-0394e717855809492
+==> amazon-ebs.ubuntu: Waiting for AMI to become ready...
+==> amazon-ebs.ubuntu: Copying/Encrypting AMI (ami-0394e717855809492) to other regions...
+    amazon-ebs.ubuntu: Copying to: us-east-1
+    amazon-ebs.ubuntu: Copying to: eu-central-1
+    amazon-ebs.ubuntu: Waiting for all copies to complete...
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-0394e717855809492)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-0f39274202b9a4168
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-023b4b426ce72ebaf)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-049988f1bf1b0ab7b
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-0f846f05ea0658722)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-0a37b60218db2fbc9
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Terminating the source AWS instance...
+==> amazon-ebs.ubuntu: Cleaning up any extra volumes...
+==> amazon-ebs.ubuntu: No volumes to clean up, skipping
+==> amazon-ebs.ubuntu: Deleting temporary security group...
+==> amazon-ebs.ubuntu: Deleting temporary keypair...
+Build 'amazon-ebs.ubuntu' finished after 8 minutes 36 seconds.
+
+==> Wait completed after 8 minutes 36 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> amazon-ebs.ubuntu: AMIs were created:
+eu-central-1: ami-0f846f05ea0658722
+us-east-1: ami-023b4b426ce72ebaf
+us-west-2: ami-0394e717855809492
