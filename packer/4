@@ -1,1 +1,159 @@
 
+amazon-ebs.ubuntu: output will be in this color.
+
+==> amazon-ebs.ubuntu: Prevalidating any provided VPC information
+==> amazon-ebs.ubuntu: Prevalidating AMI Name: packer-ubuntu-aws-1627395861
+    amazon-ebs.ubuntu: Found Image ID: ami-09862fadec6997084
+==> amazon-ebs.ubuntu: Creating temporary keypair: packer_61001715-0b7e-f189-a1f6-46b95ad7f767
+==> amazon-ebs.ubuntu: Creating temporary security group for this instance: packer_61001718-c06d-2013-39c1-592db90f269d
+==> amazon-ebs.ubuntu: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
+==> amazon-ebs.ubuntu: Launching a source AWS instance...
+==> amazon-ebs.ubuntu: Adding tags to source instance
+    amazon-ebs.ubuntu: Adding tag: "Name": "Packer Builder"
+    amazon-ebs.ubuntu: Instance ID: i-09cbacfe95710ffd8
+==> amazon-ebs.ubuntu: Waiting for instance (i-09cbacfe95710ffd8) to become ready...
+==> amazon-ebs.ubuntu: Using SSH communicator to connect: 18.222.125.176
+==> amazon-ebs.ubuntu: Waiting for SSH to become available...
+==> amazon-ebs.ubuntu: Connected to SSH!
+==> amazon-ebs.ubuntu: Provisioning with shell script: /tmp/packer-shell257486099
+    amazon-ebs.ubuntu: Installing Updates
+    amazon-ebs.ubuntu: Get:1 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+    amazon-ebs.ubuntu: Hit:2 http://archive.ubuntu.com/ubuntu bionic InRelease
+    amazon-ebs.ubuntu: Get:3 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+    amazon-ebs.ubuntu: Get:4 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [1814 kB]
+    amazon-ebs.ubuntu: Get:5 http://security.ubuntu.com/ubuntu bionic-security/main Translation-en [333 kB]
+    amazon-ebs.ubuntu: Get:6 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
+    amazon-ebs.ubuntu: Get:7 http://security.ubuntu.com/ubuntu bionic-security/restricted amd64 Packages [389 kB]
+    amazon-ebs.ubuntu: Get:8 http://security.ubuntu.com/ubuntu bionic-security/restricted Translation-en [52.3 kB]
+    amazon-ebs.ubuntu: Get:9 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [1132 kB]
+    amazon-ebs.ubuntu: Get:10 http://security.ubuntu.com/ubuntu bionic-security/universe Translation-en [257 kB]
+    amazon-ebs.ubuntu: Get:11 http://security.ubuntu.com/ubuntu bionic-security/multiverse amd64 Packages [20.9 kB]
+    amazon-ebs.ubuntu: Get:12 http://security.ubuntu.com/ubuntu bionic-security/multiverse Translation-en [4732 B]
+    amazon-ebs.ubuntu: Get:13 http://archive.ubuntu.com/ubuntu bionic/universe amd64 Packages [8570 kB]
+    amazon-ebs.ubuntu: Get:14 http://archive.ubuntu.com/ubuntu bionic/universe Translation-en [4941 kB]
+    amazon-ebs.ubuntu: Get:15 http://archive.ubuntu.com/ubuntu bionic/multiverse amd64 Packages [151 kB]
+    amazon-ebs.ubuntu: Get:16 http://archive.ubuntu.com/ubuntu bionic/multiverse Translation-en [108 kB]
+    amazon-ebs.ubuntu: Get:17 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [2160 kB]
+    amazon-ebs.ubuntu: Get:18 http://archive.ubuntu.com/ubuntu bionic-updates/restricted amd64 Packages [413 kB]
+    amazon-ebs.ubuntu: Get:19 http://archive.ubuntu.com/ubuntu bionic-updates/restricted Translation-en [56.0 kB]
+    amazon-ebs.ubuntu: Get:20 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1743 kB]
+    amazon-ebs.ubuntu: Get:21 http://archive.ubuntu.com/ubuntu bionic-updates/universe Translation-en [373 kB]
+    amazon-ebs.ubuntu: Get:22 http://archive.ubuntu.com/ubuntu bionic-updates/multiverse amd64 Packages [26.6 kB]
+    amazon-ebs.ubuntu: Get:23 http://archive.ubuntu.com/ubuntu bionic-updates/multiverse Translation-en [6792 B]
+    amazon-ebs.ubuntu: Get:24 http://archive.ubuntu.com/ubuntu bionic-backports/main amd64 Packages [10.0 kB]
+    amazon-ebs.ubuntu: Get:25 http://archive.ubuntu.com/ubuntu bionic-backports/main Translation-en [4764 B]
+    amazon-ebs.ubuntu: Get:26 http://archive.ubuntu.com/ubuntu bionic-backports/universe amd64 Packages [10.3 kB]
+    amazon-ebs.ubuntu: Get:27 http://archive.ubuntu.com/ubuntu bionic-backports/universe Translation-en [4588 B]
+    amazon-ebs.ubuntu: Fetched 22.8 MB in 9s (2528 kB/s)
+    amazon-ebs.ubuntu: Reading package lists...
+    amazon-ebs.ubuntu: Reading package lists...
+    amazon-ebs.ubuntu: Building dependency tree...
+    amazon-ebs.ubuntu: Reading state information...
+    amazon-ebs.ubuntu: The following additional packages will be installed:
+    amazon-ebs.ubuntu:   libnginx-mod-http-echo nginx-common nginx-light
+    amazon-ebs.ubuntu: Suggested packages:
+    amazon-ebs.ubuntu:   fcgiwrap nginx-doc ssl-cert
+    amazon-ebs.ubuntu: The following NEW packages will be installed:
+    amazon-ebs.ubuntu:   libnginx-mod-http-echo nginx nginx-common nginx-light
+    amazon-ebs.ubuntu: 0 upgraded, 4 newly installed, 0 to remove and 10 not upgraded.
+    amazon-ebs.ubuntu: Need to get 451 kB of archives.
+    amazon-ebs.ubuntu: After this operation, 1554 kB of additional disk space will be used.
+    amazon-ebs.ubuntu: Get:1 http://security.ubuntu.com/ubuntu bionic-security/main amd64 nginx-common all 1.14.0-0ubuntu1.9 [37.2 kB]
+    amazon-ebs.ubuntu: Get:2 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 libnginx-mod-http-echo amd64 1.14.0-0ubuntu1.9 [21.1 kB]
+    amazon-ebs.ubuntu: Get:3 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 nginx-light amd64 1.14.0-0ubuntu1.9 [390 kB]
+    amazon-ebs.ubuntu: Get:4 http://security.ubuntu.com/ubuntu bionic-security/main amd64 nginx all 1.14.0-0ubuntu1.9 [3596 B]
+==> amazon-ebs.ubuntu: debconf: unable to initialize frontend: Dialog
+==> amazon-ebs.ubuntu: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+==> amazon-ebs.ubuntu: debconf: falling back to frontend: Readline
+==> amazon-ebs.ubuntu: debconf: unable to initialize frontend: Readline
+==> amazon-ebs.ubuntu: debconf: (This frontend requires a controlling tty.)
+==> amazon-ebs.ubuntu: debconf: falling back to frontend: Teletype
+==> amazon-ebs.ubuntu: dpkg-preconfigure: unable to re-open stdin:
+    amazon-ebs.ubuntu: Fetched 451 kB in 0s (2197 kB/s)
+    amazon-ebs.ubuntu: Selecting previously unselected package nginx-common.
+    amazon-ebs.ubuntu: (Reading database ... 57309 files and directories currently installed.)
+    amazon-ebs.ubuntu: Preparing to unpack .../nginx-common_1.14.0-0ubuntu1.9_all.deb ...
+    amazon-ebs.ubuntu: Unpacking nginx-common (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Selecting previously unselected package libnginx-mod-http-echo.
+    amazon-ebs.ubuntu: Preparing to unpack .../libnginx-mod-http-echo_1.14.0-0ubuntu1.9_amd64.deb ...
+    amazon-ebs.ubuntu: Unpacking libnginx-mod-http-echo (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Selecting previously unselected package nginx-light.
+    amazon-ebs.ubuntu: Preparing to unpack .../nginx-light_1.14.0-0ubuntu1.9_amd64.deb ...
+    amazon-ebs.ubuntu: Unpacking nginx-light (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Selecting previously unselected package nginx.
+    amazon-ebs.ubuntu: Preparing to unpack .../nginx_1.14.0-0ubuntu1.9_all.deb ...
+    amazon-ebs.ubuntu: Unpacking nginx (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Setting up nginx-common (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: debconf: unable to initialize frontend: Dialog
+    amazon-ebs.ubuntu: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+    amazon-ebs.ubuntu: debconf: falling back to frontend: Readline
+    amazon-ebs.ubuntu: Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
+    amazon-ebs.ubuntu: Setting up libnginx-mod-http-echo (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Setting up nginx-light (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Setting up nginx (1.14.0-0ubuntu1.9) ...
+    amazon-ebs.ubuntu: Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+    amazon-ebs.ubuntu: Processing triggers for ufw (0.36-0ubuntu0.18.04.1) ...
+    amazon-ebs.ubuntu: Processing triggers for ureadahead (0.100.0-21) ...
+    amazon-ebs.ubuntu: Processing triggers for systemd (237-3ubuntu10.49) ...
+==> amazon-ebs.ubuntu: Stopping the source instance...
+    amazon-ebs.ubuntu: Stopping instance
+==> amazon-ebs.ubuntu: Waiting for the instance to stop...
+==> amazon-ebs.ubuntu: Creating AMI packer-ubuntu-aws-1627395861 from instance i-09cbacfe95710ffd8
+    amazon-ebs.ubuntu: AMI: ami-01030477ab9b8de5f
+==> amazon-ebs.ubuntu: Waiting for AMI to become ready...
+==> amazon-ebs.ubuntu: Copying/Encrypting AMI (ami-01030477ab9b8de5f) to other regions...
+    amazon-ebs.ubuntu: Copying to: us-west-2
+    amazon-ebs.ubuntu: Copying to: us-east-1
+    amazon-ebs.ubuntu: Copying to: eu-central-1
+    amazon-ebs.ubuntu: Waiting for all copies to complete...
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-0cbecea77eb31ac8b)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-0ab317c3b2dfe8949
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-06db5843250460769)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-03f2ad36769e92553
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-08559c73f451d5beb)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-0f29a7ad16a80bc22
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Adding tags to AMI (ami-01030477ab9b8de5f)...
+==> amazon-ebs.ubuntu: Tagging snapshot: snap-0020bd523989236d8
+==> amazon-ebs.ubuntu: Creating AMI tags
+    amazon-ebs.ubuntu: Adding tag: "Created-by": "Packer"
+    amazon-ebs.ubuntu: Adding tag: "Environment": "Production"
+    amazon-ebs.ubuntu: Adding tag: "Name": "MyUbuntuImage"
+    amazon-ebs.ubuntu: Adding tag: "OS_Version": "Ubuntu 18.04"
+    amazon-ebs.ubuntu: Adding tag: "Release": "Latest"
+==> amazon-ebs.ubuntu: Creating snapshot tags
+==> amazon-ebs.ubuntu: Terminating the source AWS instance...
+==> amazon-ebs.ubuntu: Cleaning up any extra volumes...
+==> amazon-ebs.ubuntu: No volumes to clean up, skipping
+==> amazon-ebs.ubuntu: Deleting temporary security group...
+==> amazon-ebs.ubuntu: Deleting temporary keypair...
+Build 'amazon-ebs.ubuntu' finished after 8 minutes 48 seconds.
+
+==> Wait completed after 8 minutes 48 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> amazon-ebs.ubuntu: AMIs were created:
+eu-central-1: ami-06db5843250460769
+us-east-1: ami-0cbecea77eb31ac8b
+us-east-2: ami-01030477ab9b8de5f
+us-west-2: ami-08559c73f451d5beb
