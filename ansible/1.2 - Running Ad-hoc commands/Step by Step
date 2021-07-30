@@ -1,1 +1,183 @@
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 --list-hosts
+  hosts (1):
+    node1
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible web  --list-hosts
+  hosts (3):
+    node1
+    node2
+    node3
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible 'node*' --list-hosts
+  hosts (3):
+    node1
+    node3
+    node2
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible all --list-hosts
+  hosts (3):
+    node1
+    node2
+    node3
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ls -la .ansible.cfg
+-rw-rw-r-- 1 nik nik 210 Jul 30 12:27 .ansible.cfg
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ cat ansible.cfg
+[defaults]
+stdout_callback      = yaml
+connection           = smart
+timeout              = 60
+deprecation_warnings = False
+host_key_checking    = False
+retry_files_enabled  = False
+inventory            = ./hosts.txt
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ cat /home/nik/ansible/hosts.txt
+[web]
+node1 ansible_host=3.16.168.57 ansible_user=ec2-user ansible_ssh_private_key_file=/home/nik/webserverkeypair.pem
+node2 ansible_host=18.118.48.8 ansible_user=ec2-user ansible_ssh_private_key_file=/home/nik/webserverkeypair.pem
+node3 ansible_host=18.223.98.155 ansible_user=ec2-user ansible_ssh_private_key_file=/home/nik/webserverkeypair.pem
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible web -m ping
+[WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node3 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node2 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 -m command -a "id"
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | CHANGED | rc=0 >>
+uid=1000(ec2-user) gid=1000(ec2-user) groups=1000(ec2-user),4(adm),10(wheel),190(systemd-journal)
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible all -m command -a 'uname -r'
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | CHANGED | rc=0 >>
+4.14.238-182.422.amzn2.x86_64
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node2 | CHANGED | rc=0 >>
+4.14.238-182.422.amzn2.x86_64
+[WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node3 | CHANGED | rc=0 >>
+4.14.238-182.422.amzn2.x86_64
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible all -m command -a 'uname -r' -o
+node3 | CHANGED | rc=0 | (stdout) 4.14.238-182.422.amzn2.x86_64
+node2 | CHANGED | rc=0 | (stdout) 4.14.238-182.422.amzn2.x86_64
+node1 | CHANGED | rc=0 | (stdout) 4.14.238-182.422.amzn2.x86_64
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd'
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | FAILED! => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "checksum": "4458b979ede3c332f8f2128385df4ba305e58c27", 
+    "msg": "Destination /etc not writable"
+}
+
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd' -b
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | CHANGED => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": true, 
+    "checksum": "4458b979ede3c332f8f2128385df4ba305e58c27", 
+    "dest": "/etc/motd", 
+    "gid": 0, 
+    "group": "root", 
+    "md5sum": "65a4290ee5559756ad04e558b0e0c4e3", 
+    "mode": "0644", 
+    "owner": "root", 
+    "size": 19, 
+    "src": "/home/ec2-user/.ansible/tmp/ansible-tmp-1627655403.12-27289-10294288026728/source", 
+    "state": "file", 
+    "uid": 0
+}
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 -m command -a 'cat /etc/motd'
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | CHANGED | rc=0 >>
+Managed by Ansible
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible-doc -l | grep -i yum
+yum                                                           Manages packages with the `yum' package manager                                                                                          
+yum_repository  
+
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible$ ansible node1 -m yum -a 'name=screen state=latest' -b
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "changes": {
+        "installed": [], 
+        "updated": []
+    }, 
+    "msg": "", 
+    "rc": 0, 
+    "results": [
+        "All packages providing screen are up to date", 
+        ""
+    ]
+}
+
+
+
+
+
+
+
+
+
 
