@@ -1,0 +1,237 @@
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook apache.yml
+
+PLAY [Apache server installed] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [latest Apache version installed] *********************************************************************************************************************************************************************
+changed: [node1]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ grep node1 ./hosts.txt
+node1 ansible_host=3.16.168.57 ansible_user=ec2-user ansible_ssh_private_key_file=/home/sysadmin/webserverkeypair.pem
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ssh -i "webserverkeypair.pem" ec2-user@ec2-3-16-168-57.us-east-2.compute.amazonaws.com
+Warning: Identity file webserverkeypair.pem not accessible: No such file or directory.
+Last login: Fri Jul 30 14:35:09 2021 from 167.71.60.126
+Managed by Ansible
+[ec2-user@ip-172-31-29-81 ~]$ rpm -qi httpd
+Name        : httpd
+Version     : 2.4.48
+Release     : 2.amzn2
+Architecture: x86_64
+Install Date: Fri Jul 30 14:35:14 2021
+Group       : System Environment/Daemons
+Size        : 4232571
+License     : ASL 2.0
+Signature   : RSA/SHA256, Mon Jun 28 20:37:29 2021, Key ID 11cf1f95c87f5b1a
+Source RPM  : httpd-2.4.48-2.amzn2.src.rpm
+Build Date  : Fri Jun 25 18:54:21 2021
+Build Host  : build.amazon.com
+Relocations : (not relocatable)
+Packager    : Amazon Linux
+Vendor      : Amazon Linux
+URL         : https://httpd.apache.org/
+Summary     : Apache HTTP Server
+Description :
+The Apache HTTP Server is a powerful, efficient, and extensible
+web server.
+[ec2-user@ip-172-31-29-81 ~]$ 
+---> exit
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible node1 -m command -a 'rpm -qi httpd'
+[WARNING]: Consider using the yum, dnf or zypper module rather than running 'rpm'.  If you need to use command because yum, dnf or zypper is insufficient you can add 'warn: false' to this command task or
+set 'command_warnings=False' in ansible.cfg to get rid of this message.
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node1 | CHANGED | rc=0 >>
+Name        : httpd
+Version     : 2.4.48
+Release     : 2.amzn2
+Architecture: x86_64
+Install Date: Fri Jul 30 14:35:14 2021
+Group       : System Environment/Daemons
+Size        : 4232571
+License     : ASL 2.0
+Signature   : RSA/SHA256, Mon Jun 28 20:37:29 2021, Key ID 11cf1f95c87f5b1a
+Source RPM  : httpd-2.4.48-2.amzn2.src.rpm
+Build Date  : Fri Jun 25 18:54:21 2021
+Build Host  : build.amazon.com
+Relocations : (not relocatable)
+Packager    : Amazon Linux
+Vendor      : Amazon Linux
+URL         : https://httpd.apache.org/
+Summary     : Apache HTTP Server
+Description :
+The Apache HTTP Server is a powerful, efficient, and extensible
+web server.
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook apache.yml
+
+PLAY [Apache server installed] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [latest Apache version installed] *********************************************************************************************************************************************************************
+ok: [node1]
+
+TASK [Apache enabled and running] **************************************************************************************************************************************************************************
+changed: [node1]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible localhost -m uri -a "url=http://<IP>"
+localhost | FAILED! => {
+    "changed": false, 
+    "content": "", 
+    "elapsed": 0, 
+    "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno -3] Temporary failure in name resolution>", 
+    "redirected": false, 
+    "status": -1, 
+    "url": "http://<IP>"
+}
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook apache.yml
+
+PLAY [Apache server installed] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [latest Apache version installed] *********************************************************************************************************************************************************************
+ok: [node1]
+
+TASK [Apache enabled and running] **************************************************************************************************************************************************************************
+ok: [node1]
+
+TASK [copy index.html] *************************************************************************************************************************************************************************************
+changed: [node1]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible localhost -m uri -a "url=http://<IP>"
+localhost | FAILED! => {
+    "changed": false, 
+    "content": "", 
+    "elapsed": 0, 
+    "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno -3] Temporary failure in name resolution>", 
+    "redirected": false, 
+    "status": -1, 
+    "url": "http://<IP>"
+}
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook apache.yml
+
+PLAY [Apache server installed] *****************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node3]
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node2]
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [latest Apache version installed] *********************************************************************************************************************************************************************
+ok: [node1]
+changed: [node2]
+changed: [node3]
+
+TASK [Apache enabled and running] **************************************************************************************************************************************************************************
+ok: [node1]
+changed: [node2]
+changed: [node3]
+
+TASK [copy index.html] *************************************************************************************************************************************************************************************
+ok: [node1]
+changed: [node3]
+changed: [node2]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+node1                      : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node3                      : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible node2,node3 -m uri -a "url=http://localhost/"
+[WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node3 | SUCCESS => {
+    "accept_ranges": "bytes", 
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "connection": "Upgrade, close", 
+    "content_length": "48", 
+    "content_type": "text/html; charset=UTF-8", 
+    "cookies": {}, 
+    "cookies_string": "", 
+    "date": "Fri, 30 Jul 2021 15:08:56 GMT", 
+    "elapsed": 0, 
+    "etag": "\"30-5c858954db807\"", 
+    "last_modified": "Fri, 30 Jul 2021 15:07:51 GMT", 
+    "msg": "OK (48 bytes)", 
+    "redirected": false, 
+    "server": "Apache/2.4.48 ()", 
+    "status": 200, 
+    "upgrade": "h2,h2c", 
+    "url": "http://localhost/"
+}
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+node2 | SUCCESS => {
+    "accept_ranges": "bytes", 
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    }, 
+    "changed": false, 
+    "connection": "Upgrade, close", 
+    "content_length": "48", 
+    "content_type": "text/html; charset=UTF-8", 
+    "cookies": {}, 
+    "cookies_string": "", 
+    "date": "Fri, 30 Jul 2021 15:08:56 GMT", 
+    "elapsed": 0, 
+    "etag": "\"30-5c858954e062d\"", 
+    "last_modified": "Fri, 30 Jul 2021 15:07:51 GMT", 
+    "msg": "OK (48 bytes)", 
+    "redirected": false, 
+    "server": "Apache/2.4.48 ()", 
+    "status": 200, 
+    "upgrade": "h2,h2c", 
+    "url": "http://localhost/"
+}
+
+
+
+
+
+
+
+
+
