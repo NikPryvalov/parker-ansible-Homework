@@ -1,0 +1,24 @@
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook ftpserver.yml
+
+PLAY [Install vsftpd on ftpservers] ************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host node3 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node3]
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node2]
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [Install FTP server when host in ftpserver group] *****************************************************************************************************************************************************
+skipping: [node1]
+skipping: [node3]
+changed: [node2]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+node1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node3                      : ok=1    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
