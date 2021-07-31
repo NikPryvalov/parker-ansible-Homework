@@ -1,0 +1,36 @@
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook motd-facts.yml
+
+PLAY [Fill motd file with host data] *****************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************************************
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node1]
+
+TASK [template] **************************************************************************************************************************************
+changed: [node1]
+
+PLAY RECAP *******************************************************************************************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+
+
+ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ssh ec2-user@3.16.168.57
+Last login: Sat Jul 31 07:40:24 2021 from 167.71.60.126
+Welcome to ip-172-31-29-81.
+Amazon 2
+deployed on x86_64 architecture.
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible node1 -m setup|grep -i kernel
+[WARNING]: Platform linux on host node1 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+        "ansible_kernel": "4.14.238-182.422.amzn2.x86_64", 
+        "ansible_kernel_version": "#1 SMP Tue Jul 20 20:35:54 UTC 2021",
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ssh ec2-user@3.16.168.57
+Last login: Sat Jul 31 07:46:18 2021 from 167.71.60.126
+Welcome to ip-172-31-29-81.
+Amazon 2
+deployed on x86_64 architecture
+running kernel 4.14.238-182.422.amzn2.x86_64.
