@@ -1,1 +1,68 @@
 
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-galaxy init --offline roles/apache_vhost
+- Role roles/apache_vhost was created successfully
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ tree roles
+roles
+└── apache_vhost
+    ├── README.md
+    ├── defaults
+    │   └── main.yml
+    ├── files
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── tasks
+    │   └── main.yml
+    ├── templates
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+
+9 directories, 8 files
+
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ ansible-playbook test_apache_role.yml
+
+PLAY [use apache_vhost role playbook] ****************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************************************
+[WARNING]: Platform linux on host node2 is using the discovered Python interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+ok: [node2]
+
+TASK [debug] *****************************************************************************************************************************************
+ok: [node2] => 
+  msg: Beginning web server configuration.
+
+TASK [apache_vhost : install httpd] ******************************************************************************************************************
+ok: [node2]
+
+TASK [apache_vhost : start and enable httpd service] *************************************************************************************************
+ok: [node2]
+
+TASK [apache_vhost : ensure vhost directory is present] **********************************************************************************************
+changed: [node2]
+
+TASK [apache_vhost : deliver html content] ***********************************************************************************************************
+changed: [node2]
+
+TASK [apache_vhost : template vhost file] ************************************************************************************************************
+changed: [node2]
+
+RUNNING HANDLER [apache_vhost : restart_httpd] *******************************************************************************************************
+changed: [node2]
+
+TASK [debug] *****************************************************************************************************************************************
+ok: [node2] => 
+  msg: Web server has been configured.
+
+PLAY RECAP *******************************************************************************************************************************************
+node2                      : ok=9    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+@ubuntu-s-1vcpu-1gb-fra1-01:~/ansible/ansible-files$ curl http://18.118.48.8:8080
+simple vhost index
